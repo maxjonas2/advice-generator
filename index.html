@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <meta
+      name="description"
+      content="ADvice slip generator for daily motivation."
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <link rel="stylesheet" href="./css/main.css" />
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Frontend Mentor | Advice generator app</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  </head>
+  <body>
+    <template id="card-scene-template"> </template>
+
+    <div id="card-container" class="card-container">
+      <div id="card-scene" class="card-scene">
+        <article class="card flow card-front">
+          <h4 class="advice-title">Advice #117</h4>
+          <p class="advice-text">
+            Card one content goes here. Lorem ipsum dolor sit amet consectetur.
+          </p>
+          <div class="divider">
+            <img src="./images/pattern-divider-mobile.svg" alt="" />
+          </div>
+          <button class="btn btn-dice">
+            <img src="./images/icon-dice.svg" alt="" />
+          </button>
+        </article>
+        <article class="card flow card-back">
+          <h4 class="advice-title">Advice #117</h4>
+          <p class="advice-text">
+            Card two content goes here. Lorem ipsum dolor sit amet consectetur.
+          </p>
+          <div class="divider">
+            <img src="./images/pattern-divider-mobile.svg" alt="" />
+          </div>
+          <button class="btn btn-dice">
+            <img src="./images/icon-dice.svg" alt="" />
+          </button>
+        </article>
+      </div>
+    </div>
+
+    <script>
+      let currentFace = "front",
+        iteration = 0;
+
+      $(function () {});
+
+      fetchAdviceData().then(data => populateCard(data, currentFace));
+
+      $(".btn-dice").on("click", nextCard);
+
+      async function nextCard() {
+        const res = await fetchAdviceData();
+        currentFace = currentFace === "front" ? "back" : "front";
+        iteration++;
+        populateCard(res, currentFace);
+        $("#card-scene").css({ transform: `rotateY(${iteration * 180}deg)` });
+      }
+
+      function fetchAdviceData() {
+        return fetch("https://api.adviceslip.com/advice", {
+          method: "get"
+        }).then(response => response.json());
+      }
+
+      function populateCard(data, face) {
+        $(face === "front" ? ".card-front" : ".card-back")
+          .find(".advice-title")
+          .text("Advice #" + data.slip.id)
+          .end()
+          .find(".advice-text")
+          .text(data.slip.advice);
+      }
+    </script>
+  </body>
+</html>
