@@ -32,7 +32,7 @@
 }
 
 p {
-  line-height: 1.4;
+  line-height: 1.5;
 }
 p.center {
   text-align: center;
@@ -63,7 +63,7 @@ strong {
 :root {
   --bg-color-body: #202632;
   --bg-color-card: #313a49;
-  --color-primary: #4feca0;
+  --color-primary: #53ffaa;
   font-size: 14pt;
 }
 
@@ -73,9 +73,10 @@ html {
 
 body {
   background-color: var(--bg-color-body);
-  font-family: system-ui;
+  font-family: "Manrope", sans-serif;
   height: 100%;
   overflow: hidden;
+  padding: 0 1rem;
 }
 
 .card-container {
@@ -96,7 +97,7 @@ body {
   --card-width: min(100vw, 400px);
   position: relative;
   width: var(--card-width);
-  height: 276px;
+  min-height: 300px;
   backface-visibility: hidden;
   transform-style: preserve-3d;
   transition: transform 0.5s ease;
@@ -138,8 +139,9 @@ body {
   font-weight: 600;
 }
 .card .advice-text {
-  color: rgba(255, 255, 255, 0.8);
+  color: #cee3e9;
   font-size: 1.15rem;
+  font-weight: 800;
 }
 .card .advice-text::before {
   content: '"';
@@ -161,7 +163,6 @@ body {
   background-color: var(--color-primary);
   position: absolute;
   bottom: calc(var(--size) / 2 * -1);
-  left: calc(var(--card-width) / 2 - var(--size) / 2);
   cursor: pointer;
   z-index: 2;
 }
@@ -177,6 +178,32 @@ body {
 }
 .btn-dice:hover::before {
   opacity: 0.6;
+}
+
+.dice-clicked {
+  animation: shake 0.4s;
+  transform-origin: bottom center;
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(-15deg);
+  }
+  20% {
+    transform: rotate(15deg);
+  }
+  40% {
+    transform: rotate(-15deg);
+  }
+  60% {
+    transform: rotate(15deg);
+  }
+  80% {
+    transform: rotate(-15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

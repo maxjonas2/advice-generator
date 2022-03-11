@@ -14,6 +14,12 @@
       sizes="32x32"
       href="./images/favicon-32x32.png"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="stylesheet" href="./css/main.css" />
 
@@ -24,8 +30,6 @@
     ></script>
 
     <title>Frontend Mentor | Advice generator app</title>
-
-    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   </head>
   <body>
     <template id="card-scene-template"> </template>
@@ -33,10 +37,8 @@
     <div id="card-container" class="card-container">
       <div id="card-scene" class="card-scene">
         <article class="card flow card-front">
-          <h4 class="advice-title">Advice #117</h4>
-          <p class="advice-text">
-            Card one content goes here. Lorem ipsum dolor sit amet consectetur.
-          </p>
+          <h4 class="advice-title">Advice</h4>
+          <p class="advice-text">Loading...</p>
           <div class="divider">
             <img src="./images/pattern-divider-mobile.svg" alt="" />
           </div>
@@ -45,10 +47,8 @@
           </button>
         </article>
         <article class="card flow card-back">
-          <h4 class="advice-title">Advice #117</h4>
-          <p class="advice-text">
-            Card two content goes here. Lorem ipsum dolor sit amet consectetur.
-          </p>
+          <h4 class="advice-title">Advice</h4>
+          <p class="advice-text">Loading...</p>
           <div class="divider">
             <img src="./images/pattern-divider-mobile.svg" alt="" />
           </div>
@@ -63,11 +63,20 @@
       let currentFace = "front",
         iteration = 0;
 
-      $(function () {});
-
       fetchAdviceData().then(data => populateCard(data, currentFace));
 
-      $(".btn-dice").on("click", nextCard);
+      function handleDiceClick(e) {
+        e.target.classList.remove("dice-clicked");
+      }
+
+      $(".btn-dice").on("click", function () {
+        $(this)
+          .find("img")
+          .on("animationend", handleDiceClick)
+          .addClass("dice-clicked");
+
+        nextCard();
+      });
 
       async function nextCard() {
         const res = await fetchAdviceData();
