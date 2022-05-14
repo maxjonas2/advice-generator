@@ -1,8 +1,12 @@
 # Frontend Mentor - Advice generator app
 
+https://maxjonas2.github.io/advice-generator/
+
 This is my personal implementation of the Frontend Master's "Advice Generator" challange, as described below. This implementation uses a combination of vanilla Javascript and CSS 3D animations to create the "card flip" effect. The bits of advice are obtained from the https://api.adviceslip.com using a simple Fetch request. 
 
 The text below was taken from the Frontend Master's challenge page.
+
+**********
 
 ![Design preview for the Advice generator app coding challenge](./design/desktop-preview.jpg)
 
